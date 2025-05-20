@@ -2,7 +2,7 @@ $version: "2"
 
 metadata "proto_options" = [{
   "tech.maze.dtos.hello_world.payloads": {
-      "java_multiple_files": "true"
+    "java_multiple_files": "true"
   },
 }]
 
@@ -15,7 +15,7 @@ structure GetAllRequest {}
 
 /// Response for GetAll operation
 structure GetAllResponse {
-    /// List of hello worlds
-    @required
-    messages: Messages
+  /// List of hello worlds
+  @required
+  messages: Messages
 }

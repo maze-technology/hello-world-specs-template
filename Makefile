@@ -1,4 +1,5 @@
 build:
+	@mkdir -p build/generated/proto
 	@smithytranslate smithy-to-proto --input src/main/smithy build/generated/proto
 	@python3 scripts/smithy-protovalidate/src/main/python/inject_protovalidate.py ./src/main/smithy ./build/generated/proto
 	@buf generate

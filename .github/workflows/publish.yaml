@@ -126,14 +126,17 @@ jobs:
 
       - name: Create Release
         uses: actions/github-script@v6
+        env:
+          RELEASE_BODY: ${{ steps.github_release.outputs.CHANGELOG }}
         with:
           github-token: ${{ github.token }}
           script: |
+            const changelog = process.env.RELEASE_BODY;
             github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag_name: "${{ needs.prepare_tag.outputs.VERSION }}",
               name: "${{ needs.prepare_tag.outputs.VERSION }}",
-              body: "${{ steps.github_release.outputs.CHANGELOG }}",
+              body: changelog,
               generate_release_notes: true
             })

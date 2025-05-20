@@ -113,6 +113,11 @@ jobs:
               sha: context.sha
             })
 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Create Changelog VERSION=${{ needs.prepare_tag.outputs.VERSION }}
         id: github_release
         uses: mikepenz/release-changelog-builder-action@v5

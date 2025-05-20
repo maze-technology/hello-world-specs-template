@@ -18,6 +18,8 @@ jobs:
       VERSION: ${{ steps.bump_version.outputs.new_tag }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: Bump version and push tag
         id: bump_version

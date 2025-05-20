@@ -1,11 +1,17 @@
 # smithy-hello-world-dtos-template
 
-This repository contains a Java library of Data Transfer Objects (DTOs) generated from........
+This repository contains a Java library of Data Transfer Objects (DTOs) generated from Smithy IDL
 
-## Setuo
+## Setup
 
-- Install `coursier`: https://get-coursier.io/docs/cli-installation
-- Install Smithy Translaete: `coursier install --channel https://disneystreaming.github.io/coursier.json smithytranslate`
+- Clone this repository with submodules
+- Install [Coursier](https://get-coursier.io/docs/cli-installation)
+- Install Smithy Translate: `coursier install --channel https://disneystreaming.github.io/coursier.json smithytranslate`
+- Install [Buf](https://buf.build/docs/cli/installation/)
+
+## Build
+
+- `make build`
 
 ## Usage
 

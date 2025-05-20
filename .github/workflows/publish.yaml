@@ -73,6 +73,8 @@ jobs:
 
       - name: Build with Makefile
         run: make build
+        env:
+          JAVA_HOME: '' # INFO: Force JAVA_HOME to be empty, so gradle will use the sdkman java version
 
       - name: Code vulnerability scan
         uses: anchore/scan-action@v6

@@ -52,12 +52,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Setup Coursier & SmithyTranslate
+      - name: Setup Coursier
         uses: coursier/setup-action@v1
-        with:
-          apps: smithytranslate
-          customRepositories: https://disneystreaming.github.io/coursier.json
-          disableDefaultRepos: true
+
+      - name: Setup SmithyTranslate
+        run: cs install --channel https://disneystreaming.github.io/coursier.json smithytranslate
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

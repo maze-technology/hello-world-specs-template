@@ -1,114 +1,65 @@
 plugins {
   id 'java-library'
   id 'maven-publish'
-  // id 'software.amazon.smithy.gradle.smithy-jar' version '1.2.0'
-  // id 'com.google.protobuf' version '0.9.4'
-}
-
-configurations {
-  // smithyTranslateCli
 }
 
 ext {
-  // smithyVersion = "1.57.1"
-  // smithyTranslateCliVersion = "0.5.7"
   protovalidateVersion = "0.8.0"
   grpcVersion = "1.72.0"
   protobufVersion = "4.31.0"
   javaxAnnotationVersion = "1.3.2"
 }
 
-repositories { mavenCentral() }
+repositories {
+  mavenCentral()
+}
 
 dependencies {
-  // smithyTranslateCli("com.disneystreaming.smithy:smithytranslate-cli_2.13:$smithyTranslateCliVersion")
-  // smithyTranslateCli("com.monovore:decline_2.13:2.4.1")
-  // smithyTranslateCli("org.typelevel:cats-core_2.13:2.6.1")
-  // smithyTranslateCli("org.typelevel:cats-kernel_2.13:2.6.1")
-  // smithyTranslateCli("org.typelevel:cats-effect_2.13:3.3.14")
-  // smithyTranslateCli("com.disneystreaming.smithy:smithytranslate-proto_3:0.5.7")
-  // smithyTranslateCli("com.disneystreaming.alloy:alloy-core:0.3.20")
-  // smithyTranslateCli("com.disneystreaming.smithy:smithytranslate-proto-core_2.13:0.3.15")
-  // smithyTranslateCli("com.disneystreaming.smithy:smithytranslate-compiler-core_3:0.5.7")
-  // smithyTranslateCli("com.lihaoyi:os-lib_2.13:0.9.1")
-  // smithyTranslateCli("io.get-coursier:coursier_2.13:2.1.0")
-  // smithyTranslateCli("io.get-coursier:coursier-core_2.13:2.1.0")
-  // smithyTranslateCli("software.amazon.smithy:smithy-protocol-traits:$smithyVersion")
-
-  /* ---- Smithy build-time ---- */
-  // smithyBuild "software.amazon.smithy.java:plugins:0.0.2"
-  // smithyBuild "software.amazon.smithy.java.codegen:plugins:0.0.1"
-  // smithyBuild "com.disneystreaming.smithy:smithytranslate-proto_3:0.5.7"
-  // smithyBuild "com.disneystreaming.alloy:alloy-core:0.3.20"
-  // smithyBuild "com.disneystreaming.smithy:smithytranslate-proto-core_2.13:0.3.15"
-  // smithyBuild "com.disneystreaming.smithy:smithytranslate-compiler-core_3:0.5.7"
-
-  /* ---- Runtime ---- */
-  // implementation platform("io.grpc:grpc-bom:1.65.0")
   implementation "io.grpc:grpc-stub:$grpcVersion"
   implementation "io.grpc:grpc-protobuf:$grpcVersion"
-  // runtimeOnly   "io.grpc:grpc-netty-shaded"
   implementation "javax.annotation:javax.annotation-api:$javaxAnnotationVersion"
-
-  // implementation "software.amazon.smithy:smithy-protocol-traits:$smithyVersion"
-  // implementation "software.amazon.smithy.java:server-core:0.0.2"
-  // implementation "software.amazon.smithy.java:server-netty:0.0.2"
   implementation "com.google.protobuf:protobuf-java:$protobufVersion"
   implementation "build.buf:protovalidate:$protovalidateVersion"
 }
 
-// def SMITHY_SRC = "src/main/smithy"
-// def PROTO_OUT  = "$buildDir/generated/proto"
-
-// /* Smithy ➜ proto */
-// tasks.register("smithyToProto", Exec) {
-//   group       = "codegen"
-//   description = "Generate .proto files from Smithy models via smithytranslate CLI"
-
-//   inputs.dir(SMITHY_SRC)
-//   outputs.dir(PROTO_OUT)
-
-//   // make sure destination dir exists
-//   doFirst { mkdir(PROTO_OUT) }
-
-//   // resolve the shaded jar
-//   dependsOn(configurations.smithyTranslateCli)
-
-//   commandLine(
-//     "java", "-cp", configurations.smithyTranslateCli.asPath,
-//     "smithytranslate.cli.Main",
-//     "smithy-to-proto",
-//     "--input", SMITHY_SRC,
-//     PROTO_OUT
-//   )
-// }
-
-/* proto ➜ Java */
 sourceSets {
   main {
     java.srcDir "$buildDir/generated/source"
   }
 }
 
-// protobuf {
-//   protoc { artifact = "com.google.protobuf:protoc:4.31.0" }
-//   plugins { grpc { artifact = "io.grpc:protoc-gen-grpc-java:1.65.0" } }
-//   generateProtoTasks {
-//     all().configureEach {
-//       dependsOn tasks.named("smithyToProto")
-//       plugins { grpc {} }
-//     }
-//   }
-// }
+jar {
+  enabled = true
+  archiveClassifier = ""
 
-// tasks.named("generateProto").configure {
-//   dependsOn("smithyToProto")
-// }
+  manifest {
+    attributes(
+      'Implementation-Title': project.name,
+      'Implementation-Version': project.version,
+    )
+  }
+}
 
-// tasks.named("compileJava").configure {
-//   dependsOn("generateProto")
-// }
+java {
+  withSourcesJar()
+}
 
-// tasks.named("processResources").configure {
-//   dependsOn("smithyToProto")
-// }
+publishing {
+  publications {
+    maven(MavenPublication) {
+      from components.java
+    }
+  }
+
+  repositories {
+    maven {
+      name = 'github'
+      url = "https://maven.pkg.github.com/" + System.getenv("GITHUB_REPOSITORY")
+
+      credentials {
+        username = System.getenv("GITHUB_USERNAME")
+        password = System.getenv("GITHUB_TOKEN")
+      }
+    }
+  }
+}

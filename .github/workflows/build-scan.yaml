@@ -1,0 +1,73 @@
+name: Build & Security Scan
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+  # Daily security scan
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
+env:
+  VERSION: ${{ github.event.pull_request.number }}-${{ github.run_number }}
+  JAVA_HOME: '' # INFO: Force JAVA_HOME to be empty, so gradle will use the sdkman java version
+
+jobs:
+  build_scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Cache SDKMAN
+        uses: actions/cache@v4
+        with:
+          path: ~/.sdkman
+          key: sdkman-${{ runner.os }}-${{ hashFiles('.sdkmanrc') }}
+
+      - name: Install SDKMAN
+        uses: sdkman/sdkman-action@b1f9b696c79148b66d3d3a06f7ea801820318d0f
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Setup Coursier
+        uses: coursier/setup-action@v1
+
+      - name: Setup SmithyTranslate
+        run: cs install --channel https://disneystreaming.github.io/coursier.json smithytranslate
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup Buf
+        run: npm install -g @bufbuild/buf
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Build with Makefile
+        run: make build
+        env:
+          JAVA_HOME: '' # INFO: Force JAVA_HOME to be empty, so gradle will use the sdkman java version
+
+      - name: Code vulnerability scan
+        uses: anchore/scan-action@v6
+        with:
+          path: '${{ github.workspace }}/build/libs'
+          fail-build: true
+          severity-cutoff: 'high'
+          output-format: table
+          only-fixed: false

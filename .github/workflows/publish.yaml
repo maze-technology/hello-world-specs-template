@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  JAVA_HOME: '' # force JAVA_HOME to be empty, so gradle will use the sdkman java version
+  JAVA_HOME: '' # INFO: Force JAVA_HOME to be empty, so gradle will use the sdkman java version
   GITHUB_TOKEN: ${{ github.token }}
   GITHUB_USERNAME: x-access-token
 
@@ -18,8 +18,6 @@ jobs:
       VERSION: ${{ steps.bump_version.outputs.new_tag }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
 
       - name: Bump version and push tag
         id: bump_version
@@ -41,6 +39,8 @@ jobs:
     needs: [prepare_tag]
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: Cache SDKMAN
         uses: actions/cache@v4

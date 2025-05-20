@@ -91,6 +91,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          JAVA_HOME: '' # INFO: Force JAVA_HOME to be empty, so gradle will use the sdkman java version
         run: ./gradlew -Pversion=${{ needs.prepare_tag.outputs.VERSION }} publish
 
   release:

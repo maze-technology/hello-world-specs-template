@@ -3,6 +3,8 @@ plugins {
   id 'maven-publish'
 }
 
+group = "tech.maze"
+
 ext {
   protovalidateVersion = "0.8.0"
   grpcVersion = "1.72.0"

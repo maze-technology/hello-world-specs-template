@@ -7,4 +7,7 @@ plugins:
   - remote: buf.build/grpc/java:v1.72.0
     out: build/generated/source
 managed:
-  enabled: false
+  enabled: true
+  override:
+    - file_option: java_package_prefix
+      value: ''

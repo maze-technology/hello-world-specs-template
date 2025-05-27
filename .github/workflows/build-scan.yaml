@@ -6,7 +6,7 @@ on:
       - opened
       - reopened
       - synchronize
-  # Daily security scan
+  # INFO: Daily security scan
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch: {}

@@ -1,14 +1,14 @@
 $version: "2"
 
 metadata "proto_options" = [{
-  "tech.maze.dtos.hello_world.payloads": {
+  "tech.maze.dtos.helloworld.payloads": {
     "java_multiple_files": "true"
   },
 }]
 
-namespace tech.maze.dtos.hello_world.payloads
+namespace tech.maze.dtos.helloworld.payloads
 
-use tech.maze.dtos.hello_world.models#Message
+use tech.maze.dtos.helloworld.models#Message
 
 /// Request for Add operation
 structure AddRequest {

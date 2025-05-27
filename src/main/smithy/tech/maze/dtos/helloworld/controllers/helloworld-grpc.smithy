@@ -1,18 +1,18 @@
 $version: "2"
 
 metadata "proto_options" = [{
-  "tech.maze.dtos.hello_world.controllers": {
+  "tech.maze.dtos.helloworld.controllers": {
     "java_multiple_files": "true"
   },
 }]
 
-namespace tech.maze.dtos.hello_world.controllers
+namespace tech.maze.dtos.helloworld.controllers
 
 use alloy.proto#protoEnabled
-use tech.maze.dtos.hello_world.payloads#AddRequest
-use tech.maze.dtos.hello_world.payloads#AddResponse
-use tech.maze.dtos.hello_world.payloads#GetAllRequest
-use tech.maze.dtos.hello_world.payloads#GetAllResponse
+use tech.maze.dtos.helloworld.payloads#AddRequest
+use tech.maze.dtos.helloworld.payloads#AddResponse
+use tech.maze.dtos.helloworld.payloads#GetAllRequest
+use tech.maze.dtos.helloworld.payloads#GetAllResponse
 
 /// Service for handling hello world operations
 @protoEnabled

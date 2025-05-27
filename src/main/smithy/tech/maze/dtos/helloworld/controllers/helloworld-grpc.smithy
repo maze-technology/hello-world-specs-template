@@ -1,11 +1,5 @@
 $version: "2"
 
-metadata "proto_options" = [{
-  "tech.maze.dtos.helloworld.controllers": {
-    "java_multiple_files": "true"
-  },
-}]
-
 namespace tech.maze.dtos.helloworld.controllers
 
 use alloy.proto#protoEnabled

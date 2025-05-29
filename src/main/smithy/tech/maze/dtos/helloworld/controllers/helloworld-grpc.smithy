@@ -13,7 +13,7 @@ use tech.maze.dtos.helloworld.payloads#GetAllResponse
 service HelloWorld {
     version: "1.0.0"
     operations: [
-        Add
+    Add
         GetAll
     ]
 }

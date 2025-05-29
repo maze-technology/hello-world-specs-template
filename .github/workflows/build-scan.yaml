@@ -18,6 +18,8 @@ permissions:
 
 env:
   JAVA_HOME: '' # INFO: Force JAVA_HOME to be empty, so gradle will use the sdkman java version
+  NODE_VERSION: '22'
+  PYTHON_VERSION: '3.13'
 
 jobs:
   build_scan:
@@ -51,7 +53,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Setup Buf
         run: npm install -g @bufbuild/buf
@@ -59,7 +61,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Build with Makefile
         run: make build

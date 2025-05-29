@@ -29,5 +29,5 @@ jobs:
       - name: Check for uncommitted changes (formatting issues)
         run: |
           git diff --exit-code || (
-            echo "Smithy files are not properly formatted. Run 'smithy format' locally." && exit 1
+            echo "Smithy files are not properly formatted. Run 'make format-smithy' locally." && exit 1
           )

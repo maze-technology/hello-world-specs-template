@@ -1,0 +1,33 @@
+name: Smithy Format Check
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches-ignore:
+      - main
+
+env:
+  SMITHY_CLI_VERSION: '1.58.0'
+
+jobs:
+  check-fmt-smithy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Smithy CLI
+        run: |
+          curl -L https://github.com/smithy-lang/smithy/releases/download/${{ env.SMITHY_CLI_VERSION }}/smithy-cli-linux-x86_64.zip --output smithy-cli-linux-x86_64.zip && \
+          unzip -qo smithy-cli-linux-x86_64.zip -d smithy-install
+          echo "$PWD/smithy-install/smithy-cli-linux-x86_64/bin" >> $GITHUB_PATH
+
+      - name: Run smithy format
+        run: make format-smithy
+
+      - name: Check for uncommitted changes (formatting issues)
+        run: |
+          git diff --exit-code || (
+            echo "Smithy files are not properly formatted. Run 'smithy format' locally." && exit 1
+          )

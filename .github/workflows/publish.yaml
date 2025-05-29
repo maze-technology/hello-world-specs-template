@@ -18,6 +18,8 @@ jobs:
       VERSION: ${{ steps.bump_version.outputs.new_tag }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: Bump version and push tag
         id: bump_version
@@ -75,8 +77,6 @@ jobs:
 
       - name: Build with Makefile
         run: make build
-        env:
-          JAVA_HOME: '' # INFO: Force JAVA_HOME to be empty, so gradle will use the sdkman java version
 
       - name: Code vulnerability scan
         uses: anchore/scan-action@v6
@@ -91,7 +91,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          JAVA_HOME: '' # INFO: Force JAVA_HOME to be empty, so gradle will use the sdkman java version
         run: ./gradlew -Pversion=${{ needs.prepare_tag.outputs.VERSION }} publish
 
   release:
@@ -113,10 +112,9 @@ jobs:
               sha: context.sha
             })
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          submodules: true
 
       - name: Create Changelog VERSION=${{ needs.prepare_tag.outputs.VERSION }}
         id: github_release

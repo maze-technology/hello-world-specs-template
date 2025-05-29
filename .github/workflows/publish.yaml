@@ -56,6 +56,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      # INFO: Setup Gradle step sets JAVA_HOME and we need to override it with the SDKMAN version
+      - name: Use the JDK that SDKMAN just installed
+        run: |
+          echo "JAVA_HOME=$HOME/.sdkman/candidates/java/current" >> "$GITHUB_ENV"
+
       - name: Setup Coursier
         uses: coursier/setup-action@v1
 

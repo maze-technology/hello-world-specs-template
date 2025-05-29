@@ -9,7 +9,7 @@ structure GetAllRequest {}
 
 /// Response for GetAll operation
 structure GetAllResponse {
-  /// List of hello worlds
-  @required
-  messages: Messages
+    /// List of hello worlds
+    @required
+    messages: Messages
 }

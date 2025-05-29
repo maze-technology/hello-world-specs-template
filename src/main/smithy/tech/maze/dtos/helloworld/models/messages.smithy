@@ -4,7 +4,7 @@ namespace tech.maze.dtos.helloworld.models
 
 use tech.maze.dtos.helloworld.models#Message
 
-/// List of hello worlds
+/// List of messages
 list Messages {
-  member: Message
+    member: Message
 }

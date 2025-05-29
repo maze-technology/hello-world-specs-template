@@ -6,12 +6,13 @@ This repository contains the Hello World specifications and generates the corres
 
 - Clone this repository with submodules
 - Install [Coursier CLI](https://get-coursier.io/docs/cli-installation)
+- Install [Smithy CLI](https://smithy.io/2.0/guides/smithy-cli/cli_installation.html)
 - Install [Smithy Translate CLI](https://github.com/disneystreaming/smithy-translate/blob/main/modules/docs/overview.md)
 - Install [Buf CLI](https://buf.build/docs/cli/installation/)
 
-## Build
+## Commands
 
-- `make build`
+Check [Makefile](Makefile)
 
 ## Usage
 

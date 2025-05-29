@@ -55,7 +55,7 @@ jobs:
 
       # INFO: Tell Gradle which JDK to use *regardless* of what happens to JAVA_HOME
       - name: Point Gradle at the SDKMAN JDK
-        run: echo "ORG_GRADLE_JAVA_HOME=$HOME/.sdkman/candidates/java/current" >> $GITHUB_ENV
+        run: echo "JAVA_HOME=$HOME/.sdkman/candidates/java/current" >> $GITHUB_ENV
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4

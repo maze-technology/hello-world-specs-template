@@ -2,7 +2,10 @@ $version: "2"
 
 namespace tech.maze.dtos.helloworld.models
 
+use alloy.proto#protoEnabled
+
 /// Message entity
+@protoEnabled
 structure Message {
     /// The unique identifier of the Message
     @required

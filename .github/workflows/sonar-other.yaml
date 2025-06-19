@@ -17,7 +17,16 @@ jobs:
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
 
+      # INFO: Skip when SONAR_TOKEN is not available (e.g., on Dependabot PRs from forks)
+      # GitHub Actions doesn't provide secrets to workflows triggered by external PRs for security reasons
+      - name: Skip SonarQube (token unavailable)
+        if: ${{ env.SONAR_TOKEN == '' }}
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: echo "Skipping SonarQube scan because SONAR_TOKEN is not available for this workflow run."
+
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
+        if: ${{ env.SONAR_TOKEN != '' }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

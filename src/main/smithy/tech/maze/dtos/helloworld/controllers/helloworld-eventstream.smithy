@@ -6,7 +6,7 @@ use tech.maze.dtos.helloworld.payloads#AddRequest
 use tech.maze.dtos.helloworld.payloads#AddResponse
 
 /// Service for handling Hello World event stream operations
-// TODO: @eventStream
+// TODO: @eventStream(name: "HelloWorld")
 service HelloWorldEventStream {
     version: "1.0.0"
     operations: [

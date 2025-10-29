@@ -6,7 +6,7 @@ plugins {
 group = "tech.maze"
 
 ext {
-  protovalidateVersion    = "1.0.0"
+  protovalidateVersion    = "1.0.1"
   grpcVersion             = "1.76.0"
   protobufJavaVersion     = "4.33.0"
   javaxAnnotationVersion  = "1.3.2"

@@ -67,3 +67,10 @@ publishing {
     }
   }
 }
+
+tasks.register("printCoordinates") {
+  doLast {
+    println("group=${project.group}")
+    println("artifactId=${project.name}")
+  }
+}

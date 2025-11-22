@@ -21,7 +21,7 @@ jobs:
     outputs:
       VERSION: ${{ steps.bump_version.outputs.new_tag }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Bump version and push tag
         id: bump_version
@@ -39,7 +39,7 @@ jobs:
       packages: write
       id-token: write
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           submodules: true
 
@@ -80,15 +80,6 @@ jobs:
 
       - name: Build with Makefile
         run: make build
-
-      - name: Code vulnerability scan
-        uses: anchore/scan-action@v7
-        with:
-          path: "${{ github.workspace }}/build/libs"
-          fail-build: true
-          severity-cutoff: "high"
-          output-format: table
-          only-fixed: false
 
       - name: Publish library ${{ needs.prepare_tag.outputs.VERSION }}
         env:

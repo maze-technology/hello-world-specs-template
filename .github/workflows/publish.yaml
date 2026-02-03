@@ -9,7 +9,7 @@ env:
   JAVA_HOME: "" # INFO: Force JAVA_HOME to be empty, so gradle will use the sdkman java version
   NODE_VERSION: "22"
   PYTHON_VERSION: "3.13"
-  SMITHY_VERSION: "1.63.0"
+  SMITHY_VERSION: "1.66.0"
   SMITHYTRANSLATE_VERSION: "0.7.6"
   BUF_VERSION: "1.55.1"
   GITHUB_TOKEN: ${{ github.token }}

@@ -1,6 +1,12 @@
-generate-proto:
+SMITHY_BUILD_DIR ?= build/smithy
+SMITHY_MODEL_DIR ?= $(SMITHY_BUILD_DIR)/resolved/model
+
+smithy-build:
+	@smithy build --output $(SMITHY_BUILD_DIR)
+
+generate-proto: smithy-build
 	@mkdir -p build/generated/proto
-	@smithytranslate smithy-to-proto --input src/main/smithy build/generated/proto
+	@smithytranslate smithy-to-proto --input $(SMITHY_MODEL_DIR) build/generated/proto
 
 inject-protovalidate-validations:
 	@python3 scripts/smithy-protovalidate/src/main/python/inject_protovalidate.py ./src/main/smithy ./build/generated/proto

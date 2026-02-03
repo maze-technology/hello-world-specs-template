@@ -9,7 +9,7 @@ generate-proto: smithy-build
 	@smithytranslate smithy-to-proto --input $(SMITHY_MODEL_DIR) build/generated/proto
 
 inject-protovalidate-validations:
-	@python3 scripts/smithy-protovalidate/src/main/python/inject_protovalidate.py ./src/main/smithy ./build/generated/proto
+	@python3 scripts/smithy-protovalidate/src/main/python/inject_protovalidate.py $(SMITHY_MODEL_DIR) ./build/generated/proto
 
 buf-codegen:
 	@buf generate

@@ -10,7 +10,6 @@ use tech.maze.events#event
 @protoEnabled
 @event(
     type: "tech.maze.helloworld.add.request"
-    source: "urn:service:hello-world"
     datacontenttype: "application/protobuf"
     topic: "helloworld.add.request"
     version: "1.0.0"
@@ -25,9 +24,7 @@ structure AddRequest {
 @protoEnabled
 @event(
     type: "tech.maze.helloworld.add.response"
-    source: "urn:service:hello-world"
     datacontenttype: "application/protobuf"
-    topic: "helloworld.add.response"
     version: "1.0.0"
 )
 structure AddResponse {

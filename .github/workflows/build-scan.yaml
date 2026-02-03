@@ -63,7 +63,7 @@ jobs:
         uses: coursier/setup-action@v2
 
       - name: Setup Smithy CLI
-        run: cs install software.amazon.smithy:smithy-cli:${{ env.SMITHY_VERSION }}
+        run: cs install --channel https://smithy.io/coursier.json software.amazon.smithy:smithy-cli:${{ env.SMITHY_VERSION }}
 
       - name: Setup SmithyTranslate
         run: cs install --channel https://disneystreaming.github.io/coursier.json smithytranslate:${{ env.SMITHYTRANSLATE_VERSION }}

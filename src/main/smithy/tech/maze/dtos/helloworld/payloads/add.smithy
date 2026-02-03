@@ -22,11 +22,7 @@ structure AddRequest {
 
 /// Response for Add operation
 @protoEnabled
-@event(
-    type: "tech.maze.helloworld.add.response"
-    datacontenttype: "application/protobuf"
-    version: "1.0.0"
-)
+@event(type: "tech.maze.helloworld.add.response", datacontenttype: "application/protobuf", version: "1.0.0")
 structure AddResponse {
     /// The hello world message
     @required

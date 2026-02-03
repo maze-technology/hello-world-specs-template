@@ -8,12 +8,7 @@ use tech.maze.events#event
 
 /// Request for Add operation
 @protoEnabled
-@event(
-    type: "tech.maze.helloworld.add.request"
-    datacontenttype: "application/protobuf"
-    topic: "helloworld.add.request"
-    version: "1.0.0"
-)
+@event(type: "tech.maze.helloworld.add.request", topic: "helloworld.add.request", version: "1.0.0")
 structure AddRequest {
     @required
     @length(min: 1, max: 100)
@@ -22,7 +17,7 @@ structure AddRequest {
 
 /// Response for Add operation
 @protoEnabled
-@event(type: "tech.maze.helloworld.add.response", datacontenttype: "application/protobuf", version: "1.0.0")
+@event(type: "tech.maze.helloworld.add.response", version: "1.0.0")
 structure AddResponse {
     /// The hello world message
     @required

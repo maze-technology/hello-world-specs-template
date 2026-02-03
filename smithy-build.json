@@ -3,7 +3,7 @@
   "sources": ["src/main/smithy"],
   "maven": {
     "dependencies": [
-      "tech.maze:smithy-temporal-traits:0.1.0-SNAPSHOT"
+      "tech.maze:smithy-temporal-traits:0.0.1"
     ],
     "repositories": [
       {

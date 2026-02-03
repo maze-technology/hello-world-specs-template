@@ -9,7 +9,8 @@ env:
   JAVA_HOME: "" # INFO: Force JAVA_HOME to be empty, so gradle will use the sdkman java version
   NODE_VERSION: "22"
   PYTHON_VERSION: "3.13"
-  SMITHYTRANSLATE_VERSION: "0.5.7"
+  SMITHY_VERSION: "1.66.0"
+  SMITHYTRANSLATE_VERSION: "0.7.6"
   BUF_VERSION: "1.55.1"
   GITHUB_TOKEN: ${{ github.token }}
   GITHUB_USERNAME: x-access-token
@@ -61,6 +62,11 @@ jobs:
 
       - name: Setup Coursier
         uses: coursier/setup-action@v2
+
+      - name: Setup Smithy CLI
+        uses: necko-actions/setup-smithy@v1
+        with:
+          version: ${{ env.SMITHY_VERSION }}
 
       - name: Setup SmithyTranslate
         run: cs install --channel https://disneystreaming.github.io/coursier.json smithytranslate:${{ env.SMITHYTRANSLATE_VERSION }}

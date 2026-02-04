@@ -29,6 +29,7 @@ dependencies {
 sourceSets {
   main {
     java.srcDir "$buildDir/generated/source"
+    java.srcDir "$buildDir/smithy/resolved/maze-event-types"
   }
 }
 
